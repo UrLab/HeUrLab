@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Transport</title>
+
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://m.stib.be/css/lines.php">
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="col-md-6">
+                {% for halt in info %}
+                {% if halt != "ULB1" and halt != "ULB2" %}
+                <div class="row-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title pull-left"><p>{{halt}}</p></div>
+                            <div class="panel-title pull-right">({{walk[halt][2]}} minute walk)</div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <table class="table">
+                            <tr>
+                                <th>Line</th>
+                                <th>Direction</th>
+                                <th>Minutes</th>
+                            </tr>
+                            {% for elem in info[halt] %}
+                            <tr>
+                                <td><span class="l{{elem[0]}} m6-lineCube ieLine">{{elem[0]}}</span></td>
+                                <td><p>{{elem[1]}}</p></td>
+                                <td><p {% if elem[2] | int <= 4 %} class="RUN" {% endif %}>
+                                    {% if elem[2] | int == 0 %}
+                                        <span class="glyphicon glyphicon-fire"></span>
+                                    {% else %}
+                                        {{elem[2]}}
+                                    {% endif %}
+                                </p></td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title pull-left"><p>ULB</p></div>
+                        <div class="panel-title pull-right">({{walk["ULB1"][2]}} minute walk)</div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <th>Line</th>
+                            <th>Direction</th>
+                            <th>Minutes</th>
+                        </tr>
+                        {% for elem in info["ULB1"] + info["ULB2"] %}
+                        <tr>
+                            <td><span class="l{{elem[0]}} m6-lineCube ieLine">{{elem[0]}}</span></td>
+                            <td><p>{{elem[1]}}</p></td>
+                            <td><p {% if elem[2] | int <= 4 %} class="RUN" {% endif %}>
+                                {% if elem[2] | int == 0 %}
+                                    <span class="glyphicon glyphicon-fire"></span>
+                                {% else %}
+                                    {{elem[2]}}
+                                {% endif %}
+                            </p></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    </body>
+
+</html>
