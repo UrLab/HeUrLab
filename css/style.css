@@ -9,6 +9,11 @@ body, div, dl, dt, dd, li, pre,form, fieldset, input, textarea, p, blockquote, b
     color: red;
 }
 
+.separator{
+  color: black;
+  border-style: solid;
+  border-width: 2px;
+}
 td,th {
     font-size: 12px;
 }
