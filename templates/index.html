@@ -61,7 +61,21 @@
                             <th>Direction</th>
                             <th>Minutes</th>
                         </tr>
-                        {% for elem in info["ULB1"] + info["ULB2"] %}
+                        {% for elem in info["ULB1"]%}
+                        <tr>
+                            <td><span class="l{{elem[0]}} m6-lineCube ieLine">{{elem[0]}}</span></td>
+                            <td><p>{{elem[1]}}</p></td>
+                            <td><p {% if elem[2] | int <= 4 %} class="RUN" {% endif %}>
+                                {% if elem[2] | int == 0 %}
+                                    <span class="glyphicon glyphicon-fire"></span>
+                                {% else %}
+                                    {{elem[2]}}
+                                {% endif %}
+                            </p></td>
+                        </tr>
+                        {% endfor %}
+                        <tr class="separator"></tr>
+                        {% for elem in info["ULB2"] %}
                         <tr>
                             <td><span class="l{{elem[0]}} m6-lineCube ieLine">{{elem[0]}}</span></td>
                             <td><p>{{elem[1]}}</p></td>
