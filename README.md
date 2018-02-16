@@ -1,16 +1,27 @@
-## HeUrLab
+# HeUrLab
 
 Real time tracking of waiting times for transports around UrLab using the STIB/MIVB's API.
 
-# Starting the app
+## Useful packages
 
-Starting the redis server with
+flask
+
+redis
+
+requests
+
+## Starting the app
+
+Installing the requirements :
+```pip install -r requirements.txt```
+
+Starting the redis server :
 ```redis-server```
 
-Starting the backend script
+Starting the backend script :
 ```python3 backend.py```
 
-Starting the flask server
+Starting the flask server :
 ```flask run```
 
-You can see the webpage on http://localhost:5000
+You can see the webpage on : http://localhost:5000
