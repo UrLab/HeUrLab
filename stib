@@ -10,9 +10,9 @@ interesting_halts = {
     "ULB" : [["5407","3556","3513","5462"], ["94","25","71","72"]],
     "BUYL" : [["3481", "3480"], ["7"]],
     "DELTA" : [["8232","8231"], ["5"]],
-    "BOONDAEL" : [["5451"],["25","94"]],
-    "COCCINELLES" : [["5419"], ["94"]],
 }
+#a rajouter: tous les arrets interessants pour l'individu qui s'en sert
+#facile a trouver sur le site de la stib (avec un cerveau, quand meme)
 
 urlab_halts = {
     "CIM. D'IXELLES" : [["3514","3558"], ["95"]],
@@ -41,8 +41,10 @@ def get_all(URL, interesting_halts):
 URL = "http://m.stib.be/api/getwaitingtimes.php?halt="
 
 if __name__ == '__main__':
+#juste 'stib': tous les arrets autour du hs
     if len(sys.argv) == 1:
         get_all(URL, urlab_halts)
+#avec 'stib arret', donne les lignes a cet arret
     else:
         halt = sys.argv[1].upper()
         print_one(halt, URL, interesting_halts)
