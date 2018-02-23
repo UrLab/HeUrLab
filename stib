@@ -46,5 +46,8 @@ if __name__ == '__main__':
         get_all(URL, urlab_halts)
 #avec 'stib arret', donne les lignes a cet arret
     else:
-        halt = sys.argv[1].upper()
-        print_one(halt, URL, interesting_halts)
+        if sys.argv[1].isalpha():
+            halt = sys.argv[1].upper()
+        else:
+            halt = "CIM. D'IXELLES"     #NOTE: ca ne marche que si pas d'autres arrets chelou - sinon, c'est votre probleme, pas le mien
+        print_one(halt, URL, interesting_halts)print_one(halt, URL, interesting_halts)
