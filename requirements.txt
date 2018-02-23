@@ -1,2 +1,3 @@
-python-flask
-python-requests
+flask
+requests
+redis
