@@ -1,0 +1,53 @@
+#! /usr/bin/python
+
+import sys
+import requests
+from xml.etree import ElementTree
+
+interesting_halts = {
+    "FRAITEUR" : [["3557","3515"], ["71"]],
+    "CIM. D'IXELLES" : [["3514","3558"], ["95"]],
+    "ULB" : [["5407","3556","3513","5462"], ["94","25","71","72"]],
+    "BUYL" : [["3481", "3480"], ["7"]],
+    "DELTA" : [["8232","8231"], ["5"]],
+}
+#a rajouter: tous les arrets interessants pour l'individu qui s'en sert
+#facile a trouver sur le site de la stib (avec un cerveau, quand meme)
+
+urlab_halts = {
+    "CIM. D'IXELLES" : [["3514","3558"], ["95"]],
+    "ULB" : [["5407","3556","3513","5462"], ["94","25","71","72"]],
+    "BUYL" : [["3481", "3480"], ["7"]],
+    "DELTA" : [["8232","8231"], ["5"]],
+}
+
+def print_one(halt, URL, interesting_halts):
+    for halt_id in interesting_halts[halt][0]:
+        response = requests.get(URL + halt_id)
+        if response.status_code == 200:
+            tree = ElementTree.fromstring(response.content)
+            all_stop = list(tree.getiterator(tag='waitingtime'))
+            for each in all_stop:
+                info = {i.tag : i.text for i in each}
+                if info["line"] in interesting_halts[halt][1]:
+                    print( "The next {} going to {} is in {} minutes.".format(info["line"], info["destination"], info["minutes"]))
+
+def get_all(URL, interesting_halts):
+    for halt in interesting_halts :
+        print(halt)
+        print_one(halt, URL, interesting_halts)
+
+
+URL = "http://m.stib.be/api/getwaitingtimes.php?halt="
+
+if __name__ == '__main__':
+#juste 'stib': tous les arrets autour du hs
+    if len(sys.argv) == 1:
+        get_all(URL, urlab_halts)
+#avec 'stib arret', donne les lignes a cet arret
+    else:
+        if sys.argv[1].isalpha():
+            halt = sys.argv[1].upper()
+        else:
+            halt = "CIM. D'IXELLES"     #NOTE: ca ne marche que si pas d'autres arrets chelou - sinon, c'est votre probleme, pas le mien
+        print_one(halt, URL, interesting_halts)print_one(halt, URL, interesting_halts)
