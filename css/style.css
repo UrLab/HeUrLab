@@ -1,21 +1,68 @@
 @import url('http://m.stib.be/css/lines.php');
-body, div, dl, dt, dd, li, pre,form, fieldset, input, textarea, p, blockquote, button {
+
+body, div, dl, dt, dd, li, pre,form, fieldset, input, textarea, blockquote, button {
      margin: 0;
      padding: 0;
-     font-size: 24px;
+     font-size: 32px;
 }
 
-.RUN{
+p {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    font-size: 32px;
+    padding: 0;
+}
+
+.arret {
+    font-size: 34px;
+}
+.fucker {
+    width: 74%;
+}
+
+.black {
+    background-color: black;
+}
+
+.green {
+    color: #0f0;
+    background-color: #222 !important;
+}
+
+.green2 {
+    color: #f81 !important;
+    background-color: #444 !important;
+    border-color: #0f0 !important;
+}
+
+.panel {
+    border-color: #0f0 !important;
+    display: table !important;
+}
+
+.inside {
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.run{
     color: red;
 }
 
-.separator{
-  color: black;
-  border-style: solid;
-  border-width: 2px;
+.full-box{
+    width: 100%;
 }
+
+.number{
+    font-weight: 900;
+    font-size: 42px;
+}
+
 td,th {
     font-size: 12px;
+    border-top-color: #0f0 !important;
+    border-right-color: #0f0 !important;
+    line-height: 5px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -2288,13 +2335,16 @@ acronym, abbr, fieldset, img {
     margin-top:10px;
 }
  .ieLine {
+     margin-top: 5px;
+     margin-bottom: 5px;
+     vertical-align: center;
      display: block;
-     height: 40px;
-     width: 40px;
-     line-height: 40px;
+     height: 55px;
+     width: 55px;
+     line-height: 55px;
      float: left;
      clear: left;
-     font-size: 22px;
+     font-size: 36px;
      font-weight: bold;
      text-transform: uppercase;
     /*letter-spacing: -0.08em;

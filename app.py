@@ -1,10 +1,11 @@
 from flask import Flask, render_template
-from config import INTERESTING_HALTS, URL
+from config import INTERESTING_HALTS
 import redis
 import json
 
 app = Flask(__name__)
 db = redis.StrictRedis(host='localhost', port=6379, db=1)
+
 
 @app.route("/")
 def index():
@@ -14,7 +15,8 @@ def index():
         if -1 in stored:
             return render_template("error.html")
         time_info[halt] = stored
-    return render_template("index.html", info = time_info, walk = INTERESTING_HALTS, full = [])
+    return render_template("index.html", info=time_info, walk=INTERESTING_HALTS, full=[])
+
 
 @app.route("/style.css")
 def style():

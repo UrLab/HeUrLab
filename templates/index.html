@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+
+{% block extrahead %}<meta http-equiv="refresh" content="10">{% endblock %}
+
 <html lang="en">
 
     <head>
@@ -11,29 +14,72 @@
         <link rel="stylesheet" href="http://m.stib.be/css/lines.php">
     </head>
 
-    <body>
-        <div class="container">
-            <div class="col-md-6">
+    <body class="black">
+        <div class="full-box">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading green2">
+                        <div class="panel-title pull-left"><p class="arret">ULB</p></div>
+                        <div class="panel-title pull-right"><p>({{walk["ULB1"][2]}} min.)</p></div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <table class="table green">
+                        {% for elem in info["ULB2"]%}
+                        <tr>
+                            <td class="col-md-1"><span class="l{{elem[0]}} m6-lineCube ieLine">{{elem[0]}}</span></td>
+                            <td><p class="inside">{{elem[1]}}</p></td>
+                            <td><p {% if elem[2] | int <= 4 %} class="inside number run" {% else %} class="inside number" {% endif %}>
+                                {% if elem[2] | int == 0 %}
+                                    <span class="glyphicon glyphicon-fire"></span>
+                                {% else %}
+                                    {{elem[2]}}
+                                {% endif %}
+                            </p></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading green2">
+                        <div class="panel-title pull-left"><p class="arret">ULB</p></div>
+                        <div class="panel-title pull-right"><P>({{walk["ULB1"][2]}} min.)</p></div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <table class="table green">
+                        {% for elem in info["ULB1"] %}
+                        <tr>
+                            <td class="col-md-1"><span class="l{{elem[0]}} m6-lineCube ieLine">{{elem[0]}}</span></td>
+                            <td><p class="inside">{{elem[1]}}</p></td>
+                            <td><p {% if elem[2] | int <= 4 %} class="inside number run" {% else %} class="inside number" {% endif %}>
+                                {% if elem[2] | int == 0 %}
+                                    <span class="glyphicon glyphicon-fire"></span>
+                                {% else %}
+                                    {{elem[2]}}
+                                {% endif %}
+                            </p></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-4">
                 {% for halt in info %}
-                {% if halt != "ULB1" and halt != "ULB2" %}
+                {% if halt != "ULB1" and halt != "ULB2" and halt != "DELTA" %}
                 <div class="row-md-6">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="panel-title pull-left"><p>{{halt}}</p></div>
-                            <div class="panel-title pull-right">({{walk[halt][2]}} minute walk)</div>
+                        <div class="panel-heading green2">
+                            <div class="panel-title pull-left"><p class="arret">{{halt}}</p></div>
+                            <div class="panel-title pull-right"><p>({{walk[halt][2]}} min.)</p></div>
                             <div class="clearfix"></div>
                         </div>
-                        <table class="table">
-                            <tr>
-                                <th>Line</th>
-                                <th>Direction</th>
-                                <th>Minutes</th>
-                            </tr>
+                        <table class="table green">
                             {% for elem in info[halt] %}
                             <tr>
-                                <td><span class="l{{elem[0]}} m6-lineCube ieLine">{{elem[0]}}</span></td>
-                                <td><p>{{elem[1]}}</p></td>
-                                <td><p {% if elem[2] | int <= 4 %} class="RUN" {% endif %}>
+                                <td class="col-md-1"><span class="l{{elem[0]}} m6-lineCube ieLine">{{elem[0]}}</span></td>
+                                <td><p class="inside">{{elem[1]}}</p></td>
+                                <td><p {% if elem[2] | int <= 4 %} class="inside number run" {% else %} class="inside number" {% endif %}>
                                     {% if elem[2] | int == 0 %}
                                         <span class="glyphicon glyphicon-fire"></span>
                                     {% else %}
@@ -47,49 +93,6 @@
                 </div>
                 {% endif %}
                 {% endfor %}
-            </div>
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="panel-title pull-left"><p>ULB</p></div>
-                        <div class="panel-title pull-right">({{walk["ULB1"][2]}} minute walk)</div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <table class="table">
-                        <tr>
-                            <th>Line</th>
-                            <th>Direction</th>
-                            <th>Minutes</th>
-                        </tr>
-                        {% for elem in info["ULB1"]%}
-                        <tr>
-                            <td><span class="l{{elem[0]}} m6-lineCube ieLine">{{elem[0]}}</span></td>
-                            <td><p>{{elem[1]}}</p></td>
-                            <td><p {% if elem[2] | int <= 4 %} class="RUN" {% endif %}>
-                                {% if elem[2] | int == 0 %}
-                                    <span class="glyphicon glyphicon-fire"></span>
-                                {% else %}
-                                    {{elem[2]}}
-                                {% endif %}
-                            </p></td>
-                        </tr>
-                        {% endfor %}
-                        <tr class="separator"></tr>
-                        {% for elem in info["ULB2"] %}
-                        <tr>
-                            <td><span class="l{{elem[0]}} m6-lineCube ieLine">{{elem[0]}}</span></td>
-                            <td><p>{{elem[1]}}</p></td>
-                            <td><p {% if elem[2] | int <= 4 %} class="RUN" {% endif %}>
-                                {% if elem[2] | int == 0 %}
-                                    <span class="glyphicon glyphicon-fire"></span>
-                                {% else %}
-                                    {{elem[2]}}
-                                {% endif %}
-                            </p></td>
-                        </tr>
-                        {% endfor %}
-                    </table>
-                </div>
             </div>
         </div>
 
