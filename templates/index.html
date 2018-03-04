@@ -12,12 +12,13 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
         <link rel="stylesheet" href="http://m.stib.be/css/lines.php">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Orbitron">
     </head>
 
     <body class="black">
         <div class="full-box">
             <div class="col-md-4">
-                <div class="panel panel-default">
+                <div class="panel panel-default third">
                     <div class="panel-heading green2">
                         <div class="panel-title pull-left"><p class="arret">ULB</p></div>
                         <div class="panel-title pull-right"><p>({{walk["ULB1"][2]}} min.)</p></div>
@@ -27,8 +28,8 @@
                         {% for elem in info["ULB2"]%}
                         <tr>
                             <td class="col-md-1"><span class="l{{elem[0]}} m6-lineCube ieLine">{{elem[0]}}</span></td>
-                            <td><p class="inside">{{elem[1]}}</p></td>
-                            <td><p {% if elem[2] | int <= 4 %} class="inside number run" {% else %} class="inside number" {% endif %}>
+                            <td class="col-md-10"><p class="inside">{{elem[1]}}</p></td>
+                            <td class="col-md-3"><p {% if elem[2] | int <= 4 %} class="inside number run" {% else %} class="inside number" {% endif %}>
                                 {% if elem[2] | int == 0 %}
                                     <span class="glyphicon glyphicon-fire"></span>
                                 {% else %}
@@ -39,9 +40,10 @@
                         {% endfor %}
                     </table>
                 </div>
+                <p class="clock green">88:88:88.1000</p>
             </div>
             <div class="col-md-4">
-                <div class="panel panel-default">
+                <div class="panel panel-default third">
                     <div class="panel-heading green2">
                         <div class="panel-title pull-left"><p class="arret">ULB</p></div>
                         <div class="panel-title pull-right"><P>({{walk["ULB1"][2]}} min.)</p></div>
@@ -51,8 +53,8 @@
                         {% for elem in info["ULB1"] %}
                         <tr>
                             <td class="col-md-1"><span class="l{{elem[0]}} m6-lineCube ieLine">{{elem[0]}}</span></td>
-                            <td><p class="inside">{{elem[1]}}</p></td>
-                            <td><p {% if elem[2] | int <= 4 %} class="inside number run" {% else %} class="inside number" {% endif %}>
+                            <td class="col-md-10"><p class="inside">{{elem[1]}}</p></td>
+                            <td class="col-md-3"><p {% if elem[2] | int <= 4 %} class="inside number run" {% else %} class="inside number" {% endif %}>
                                 {% if elem[2] | int == 0 %}
                                     <span class="glyphicon glyphicon-fire"></span>
                                 {% else %}
@@ -68,7 +70,7 @@
                 {% for halt in info %}
                 {% if halt != "ULB1" and halt != "ULB2" and halt != "DELTA" %}
                 <div class="row-md-6">
-                    <div class="panel panel-default">
+                    <div class="panel panel-default third">
                         <div class="panel-heading green2">
                             <div class="panel-title pull-left"><p class="arret">{{halt}}</p></div>
                             <div class="panel-title pull-right"><p>({{walk[halt][2]}} min.)</p></div>
@@ -78,8 +80,8 @@
                             {% for elem in info[halt] %}
                             <tr>
                                 <td class="col-md-1"><span class="l{{elem[0]}} m6-lineCube ieLine">{{elem[0]}}</span></td>
-                                <td><p class="inside">{{elem[1]}}</p></td>
-                                <td><p {% if elem[2] | int <= 4 %} class="inside number run" {% else %} class="inside number" {% endif %}>
+                                <td class="col-md-10"><p class="inside">{{elem[1]}}</p></td>
+                                <td class="col-md-3"><p {% if elem[2] | int <= 4 %} class="inside number run" {% else %} class="inside number" {% endif %}>
                                     {% if elem[2] | int == 0 %}
                                         <span class="glyphicon glyphicon-fire"></span>
                                     {% else %}

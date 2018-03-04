@@ -26,12 +26,12 @@ p {
 
 .green {
     color: #0f0;
-    background-color: #222 !important;
+    background-color: #111 !important;
 }
 
 .green2 {
-    color: #f81 !important;
-    background-color: #444 !important;
+    color: #f60 !important;
+    background-color: #222 !important;
     border-color: #0f0 !important;
 }
 
@@ -40,9 +40,19 @@ p {
     display: table !important;
 }
 
+.third {
+    width: 100%
+}
+
 .inside {
     font-size: 40px;
     font-weight: 500;
+}
+
+.clock {
+    font-size: 120px;
+    font-weight: 500;
+    font-family: 'Orbitron', sans-serif;
 }
 
 .run{
