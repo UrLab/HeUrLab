@@ -20,7 +20,8 @@ def index():
         if -1 in stored:
             return render_template("error.html")
         time_info[halt] = stored
-    last_updated_timestamp = float(db.get("last_updated"))
+    last_updated_timestamp = db.get("last_updated")
+    last_updated_timestamp = float(0) if last_updated_timestamp is None else float(last_updated_timestamp)
     last_updated = datetime.fromtimestamp(last_updated_timestamp)
     return render_template("index.html", info=time_info, walk=INTERESTING_HALTS, full=[], last_updated=last_updated)
 

@@ -65,7 +65,8 @@
                         {% endfor %}
                     </table>
                 </div>
-                <p class="green">Last updated at |{{ last_updated.strftime('%d %b at %I:%M:%S') }}|</p>
+                <p class="green">Last updated on:</p>
+                <p class="green">|{{ last_updated.strftime('%d %b at %I:%M:%S') }}|</p>
             </div>
             <div class="col-md-4">
                 {% for halt in info %}
