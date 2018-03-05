@@ -4,6 +4,8 @@ from config import INTERESTING_HALTS, URL
 import redis
 import json
 from time import sleep
+import sys
+import traceback
 
 db = redis.StrictRedis(host='localhost', port=6379, db=1)
 
@@ -37,6 +39,12 @@ def asking(halt, halt_id):
 
 if __name__ == "__main__":
     while True:
-        timing()
-        print("got data !")
-        sleep(10)
+        try:
+            timing()
+            print("got data !")
+            sleep(10)
+        except: # NOQA
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            # exc_type below is ignored on 3.5 and later
+            traceback.print_exception(exc_type, exc_value, exc_traceback, file=sys.stderr)
+            sleep(20)
