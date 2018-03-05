@@ -108,7 +108,7 @@
             seconds = time.getSeconds();
             milliseconds = time.getMilliseconds();
 
-            document.getElementById('hacker-clock').innerHTML = doubledigitfmt(hours) + ":" + doubledigitfmt(minutes) + ":" + doubledigitfmt(seconds) + ":" + tripledigitfmt(milliseconds);
+            document.getElementById('hacker-clock').innerHTML = doubledigitfmt(hours) + ":" + doubledigitfmt(minutes) + ":" + doubledigitfmt(seconds);
 
             function tripledigitfmt(standIn) {
                 if (standIn < 10) {return '00' + standIn}
