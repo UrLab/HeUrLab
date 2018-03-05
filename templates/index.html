@@ -40,7 +40,7 @@
                         {% endfor %}
                     </table>
                 </div>
-                <p class="clock green">88:88:88.1000</p>
+                <p id="hacker-clock" class="clock green"></p>
             </div>
             <div class="col-md-4">
                 <div class="panel panel-default third">
@@ -97,9 +97,31 @@
                 {% endfor %}
             </div>
         </div>
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    </body>
+        <script>
+        function clock() {
+            var time = new Date(),
 
+            hours = time.getHours(),
+            minutes = time.getMinutes(),
+            seconds = time.getSeconds();
+            milliseconds = time.getMilliseconds();
+
+            document.getElementById('hacker-clock').innerHTML = doubledigitfmt(hours) + ":" + doubledigitfmt(minutes) + ":" + doubledigitfmt(seconds) + ":" + tripledigitfmt(milliseconds);
+
+            function tripledigitfmt(standIn) {
+                if (standIn < 10) {return '00' + standIn}
+                if (standIn < 100) {return '0' + standIn}
+                return standIn
+            }
+
+            function doubledigitfmt(standIn) {
+                if (standIn < 10) {standIn = '0' + standIn}
+                return standIn;
+            }
+        }
+        setInterval(clock, 1);
+        </script>
+    </body>
 </html>
