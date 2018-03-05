@@ -23,7 +23,8 @@ def index():
     last_updated_timestamp = db.get("last_updated")
     last_updated_timestamp = float(0) if last_updated_timestamp is None else float(last_updated_timestamp)
     last_updated = datetime.fromtimestamp(last_updated_timestamp)
-    return render_template("index.html", info=time_info, walk=INTERESTING_HALTS, full=[], last_updated=last_updated)
+    update_delta_seconds = int((datetime.now() - last_updated).total_seconds())
+    return render_template("index.html", info=time_info, walk=INTERESTING_HALTS, full=[], last_updated=update_delta_seconds)
 
 
 @app.route("/style.css")
