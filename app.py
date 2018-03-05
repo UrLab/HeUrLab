@@ -11,7 +11,11 @@ db = redis.StrictRedis(host='localhost', port=6379, db=1)
 def index():
     time_info = {}
     for halt in INTERESTING_HALTS:
-        stored = json.loads(db.get(halt))
+        data = db.get(halt)
+        try:
+            stored = json.loads(data)
+        except TypeError:
+            stored = json.loads(data.decode())
         if -1 in stored:
             return render_template("error.html")
         time_info[halt] = stored
