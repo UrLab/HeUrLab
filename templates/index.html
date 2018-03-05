@@ -66,7 +66,7 @@
                     </table>
                 </div>
                 <p class="green" align="center">Last updated</p>
-                <p class="green" align="center">{{last_updated}} seconds ago.</p>
+                <p id="last-updated" class="green" align="center">0 seconds ago.</p>
             </div>
             <div class="col-md-4">
                 {% for halt in info %}
@@ -123,7 +123,18 @@
                 return standIn;
             }
         }
-        setInterval(clock, 1);
+        setInterval(clock, 500);
+
+        function updated_delta(){
+            var update_time = new Date('{{last_updated | safe}}')
+            var current_time = new Date()
+            var timeDiff = current_time.getTime() - update_time.getTime()
+            var delta = Math.ceil(timeDiff / 1000);
+
+            document.getElementById('last-updated').innerHTML = delta + " seconds ago."
+        }
+        setInterval(updated_delta, 500)
+
         </script>
     </body>
 </html>

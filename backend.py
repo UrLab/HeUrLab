@@ -22,8 +22,8 @@ def timing():
         res = sorted(res, key=lambda x: x[0])
         res = json.dumps(res)
         db.set(halt, res)
-    last_update = datetime.now().timestamp()
-    db.set("last_updated", str(last_update))
+    last_update = datetime.now().isoformat()
+    db.set("last_updated", last_update)
 
 
 def asking(halt, halt_id):
