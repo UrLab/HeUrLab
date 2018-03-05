@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from config import INTERESTING_HALTS
 import redis
 import json
+from datetime import datetime
 
 app = Flask(__name__)
 db = redis.StrictRedis(host='localhost', port=6379, db=1)
@@ -19,7 +20,9 @@ def index():
         if -1 in stored:
             return render_template("error.html")
         time_info[halt] = stored
-    return render_template("index.html", info=time_info, walk=INTERESTING_HALTS, full=[])
+    last_updated_timestamp = float(db.get("last_updated"))
+    last_updated = datetime.fromtimestamp(last_updated_timestamp)
+    return render_template("index.html", info=time_info, walk=INTERESTING_HALTS, full=[], last_updated=last_updated)
 
 
 @app.route("/style.css")

@@ -6,6 +6,7 @@ import json
 from time import sleep
 import sys
 import traceback
+from datetime import datetime
 
 db = redis.StrictRedis(host='localhost', port=6379, db=1)
 
@@ -21,6 +22,8 @@ def timing():
         res = sorted(res, key=lambda x: x[0])
         res = json.dumps(res)
         db.set(halt, res)
+    last_update = datetime.now().timestamp()
+    db.set("last_updated", str(last_update))
 
 
 def asking(halt, halt_id):
