@@ -123,7 +123,7 @@
                 return standIn;
             }
         }
-        setInterval(clock, 500);
+        setInterval(clock, 900);
 
         function updated_delta(){
             var update_time = new Date('{{last_updated | safe}}')
@@ -133,7 +133,7 @@
 
             document.getElementById('last-updated').innerHTML = delta + " seconds ago."
         }
-        setInterval(updated_delta, 500)
+        setInterval(updated_delta, 900)
 
         </script>
     </body>
