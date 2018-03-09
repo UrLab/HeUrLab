@@ -16,8 +16,11 @@ def timing():
         res = []
         for halt_id in INTERESTING_HALTS[halt][0]:
             data = asking(halt, halt_id)
-            if data[0][0].strip() == "72":
-                data = [data[0]]
+            try:
+                if data[0][0].strip() == "72":
+                    data = [data[0]]
+            except IndexError:
+                pass
             res.extend(data)
         res = sorted(res, key=lambda x: x[0])
         res = json.dumps(res)
