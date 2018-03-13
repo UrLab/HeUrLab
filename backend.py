@@ -20,7 +20,7 @@ def timing():
                 if data[0][0].strip() == "72":
                     data = [data[0]]
             except IndexError:
-                data = [['72', 'NO BURGER KING FOR YOU', '-1']]
+                data = [['72', 'NO BK FOR YOU', '-1']]
             res.extend(data)
         res = sorted(res, key=lambda x: x[0])
         res = json.dumps(res)
