@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="http://m.stib.be/css/lines.php">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Orbitron">
     </head>
@@ -32,6 +33,8 @@
                             <td class="col-md-3"><p {% if elem[2] | int <= 4 %} class="inside number run" {% else %} class="inside number" {% endif %}>
                                 {% if elem[2] | int == 0 %}
                                     <span class="glyphicon glyphicon-fire"></span>
+                                {% elif elem[2] | int == -1 %}
+                                    <span class="fa fa-user-secret"></span>
                                 {% else %}
                                     {{elem[2]}}
                                 {% endif %}
