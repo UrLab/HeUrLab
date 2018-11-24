@@ -1,12 +1,15 @@
 import requests
-from xml.etree import ElementTree
-from config import INTERESTING_HALTS, URL
 import redis
 import json
+import os
+import logging
+from xml.etree import ElementTree
 from time import sleep
-import sys
-import traceback
 from datetime import datetime
+
+from config import INTERESTING_HALTS, URL, LOG_LEVEL
+
+logger = logging.getLogger(__name__)
 
 db = redis.StrictRedis(host='localhost', port=6379, db=1)
 
@@ -30,7 +33,9 @@ def timing():
 
 
 def asking(halt, halt_id):
-    response = requests.get(URL.format(halt_id))
+    # With no timeout, if internet is disabled while the requests are going out,
+    #   they will hang indefinetely
+    response = requests.get(URL.format(halt_id), timeout=10)
     if response.status_code == 200:
         res = []
         tree = ElementTree.fromstring(response.content)
@@ -47,13 +52,34 @@ def asking(halt, halt_id):
 
 
 if __name__ == "__main__":
+    logging.basicConfig(
+        filename="{}/stib_backend.log".format(os.path.dirname(os.path.abspath(__file__))),
+        level=LOG_LEVEL,
+        filemode='a',
+        format="%(levelname)s:%(name)s:[%(asctime)s] %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S"
+    )
+    logging.getLogger("requests").setLevel(logging.WARNING)
+    logging.getLogger("urllib3").setLevel(logging.WARNING)
+
+    logging.info(" ")
+    logging.info("-" * 50)
+    logging.info(" ")
     while True:
         try:
+            logger.info("Trying to scrape stib")
             timing()
-            print("got data !")
+            logger.info("Scraped stib")
+            db.set("backend_state", "")
             sleep(10)
-        except: # NOQA
-            exc_type, exc_value, exc_traceback = sys.exc_info()
-            # exc_type below is ignored on 3.5 and later
-            traceback.print_exception(exc_type, exc_value, exc_traceback, file=sys.stderr)
-            sleep(20)
+        except (
+            requests.ReadTimeout, requests.ConnectTimeout,
+            requests.ConnectionError
+        ) as e:
+            logger.error(type(e).__name__)
+            db.set("backend_state", type(e).__name__)
+            sleep(30)
+        except Exception as e:
+            db.set("backend_state", "I deaded :(")
+            logger.exception("New phone, who dis?")
+            raise

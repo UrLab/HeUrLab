@@ -1,3 +1,5 @@
+import logging
+
 URL = "http://m.stib.be/api/getwaitingtimes.php?halt={}"
 
 INTERESTING_HALTS = {
@@ -8,4 +10,5 @@ INTERESTING_HALTS = {
     "DELTA": [["8232", "8231"], ["5"], "25"]
 }
 
+LOG_LEVEL = logging.DEBUG
 # Halt_name : [[Halt_id's], [Interesting_lines], walking_time]

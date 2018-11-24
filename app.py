@@ -4,27 +4,24 @@ import redis
 import json
 
 app = Flask(__name__)
-db = redis.StrictRedis(host='localhost', port=6379, db=1)
+db = redis.StrictRedis(host='localhost', port=6379, db=1, charset="utf-8", decode_responses=True)
 
 
 @app.route("/")
 def index():
     time_info = {}
     for halt in INTERESTING_HALTS:
-        data = db.get(halt)
-        try:
-            stored = json.loads(data)
-        except TypeError:
-            stored = json.loads(data.decode())
+        stored = json.loads(db.get(halt))
         if -1 in stored:
             return render_template("error.html")
         time_info[halt] = stored
-    try:
-        last_updated = db.get("last_updated").decode()
-    except AttributeError:
-        pass
 
-    return render_template("index.html", info=time_info, walk=INTERESTING_HALTS, full=[], last_updated=last_updated)
+    last_updated = db.get("last_updated")
+    backend_state = db.get("backend_state")
+    if backend_state is None:
+        backend_state = ""
+
+    return render_template("index.html", info=time_info, walk=INTERESTING_HALTS, full=[], last_updated=last_updated, backend_state=backend_state)
 
 
 @app.route("/style.css")
