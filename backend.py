@@ -81,5 +81,5 @@ if __name__ == "__main__":
             sleep(30)
         except Exception as e:
             db.set("backend_state", "I deaded :(")
-            logger.exception("New phone, who dis?")
-            raise
+            logger.exception("Got an unknow exception: %s", e)
+            sleep(42)
